@@ -33,7 +33,7 @@ export default function Login() {
         bgcolor: "#F5F5F5",
       }}
     >
-      <form onSubmit={handleSubmit} style={{ padding: "12px", width: "100%" }}>
+      <form onSubmit={handleSubmit} style={{ padding: "12px", width: {xs: "100%", md: "auto" }}}>
         <Box
           sx={{
             width: { xs: "100%", md: 296},
