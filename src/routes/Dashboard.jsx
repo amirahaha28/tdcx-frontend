@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
-import { Box, Button, Typography, TextField } from "@mui/material";
+import { Box, Button, Typography, TextField, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
 
 import useTasks from "../hooks/useTasks";
@@ -87,7 +88,6 @@ export default function Dashboard() {
                   sx={{
                     p: "12px",
                     width: "100%",
-                    //
                     position: "fixed",
                     top: { xs: "20%", md: "50%" },
                     left: "50%",
@@ -125,19 +125,21 @@ export default function Dashboard() {
             ) : (
               <Box>
                 <Top>
-                  <InfoCards stats={stats} />
+                  <InfoCards stats={stats} tasks={filtered} />
                 </Top>
 
                 {showForm && (
                   <Box
                     sx={{
-                      position: "fixed",
-                      top: "50%",
+                      p: "12px",
                       left: "50%",
-                      transform: "translate(-50%, -50%)",
                       zIndex: 1000,
+                      width: "100%",
+                      position: "fixed",
+                      top: { xs: "20%", md: "50%" },
+                      transform: "translate(-50%, -50%)",
                     }}
-                  >
+                  > 
                     <TaskForm
                       onSave={(data) => {
                         createTask(data);
@@ -148,15 +150,28 @@ export default function Dashboard() {
                   </Box>
                 )}
 
-                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Typography sx={{ color: "#537178", fontSize: "20px" }}>Tasks</Typography>
-                  <Box style={{ display: "flex", gap: 8 }}>
+                <Box sx={{ p: 1, display: { md: 'flex' }, justifyContent: 'space-between' }}>
+                  <Typography sx={{ mb: 1, color: "#537178", fontSize: "20px", textAlign: { xs: 'center', md: "left" } }}>Tasks</Typography>
+                  <Box style={{ display: { md: "flex" }, gap: 8}}>
                     <TextField
-                      placeholder="Search  by task name"
+                      placeholder="Search by task name"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <SearchIcon sx={{ color: "#8F9EA2" }} />
+                          </InputAdornment>
+                        ),
+                      }}
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
+                      sx={{
+                        mb: 1,
+                        "& .MuiInputBase-input::placeholder": {
+                          textAlign: "center",
+                        },
+                      }}
                     />
-                    <Button variant="contained" sx={{ width: "180px" }} onClick={() => setShowForm((s) => !s)}>
+                    <Button variant="contained" sx={{ width: {xs: "100%", md: "180px"} }} onClick={() => setShowForm((s) => !s)}>
                       {showForm ? "Close" : "+ New Task"}
                     </Button>
                   </Box>

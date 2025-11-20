@@ -18,7 +18,7 @@ export default function TaskForm({ onCancel, onSave }) {
       sx={{
         p: 3,
         m: "auto",
-        width: { md: 300 },
+        width: { xs: "100%", md: 300 },
         display: "flex",
         bgcolor: "white",
         borderRadius: "12px",
@@ -31,7 +31,11 @@ export default function TaskForm({ onCancel, onSave }) {
         label="Task name"
         placeholder="Enter task name"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        // onChange={(e) => setName(e.target.value)}
+        onChange={(e) => {
+          const v = e.target.value;
+          setName(v.charAt(0).toUpperCase() + v.slice(1));
+        }}
         fullWidth
         size="small"
         sx={{ pb: "12px" }}
@@ -41,9 +45,6 @@ export default function TaskForm({ onCancel, onSave }) {
         <Button type="submit" variant="contained" sx={{ flex: 1 }}>
           + New Task
         </Button>
-        {/* <Button type="button" variant="outlined" onClick={onCancel} sx={{ flex: 1 }}>
-          Cancel
-        </Button> */}
       </Box>
     </Box>
   );
