@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, TextField } from "@mui/material";
 import styled from "styled-components";
 
 import useTasks from "../hooks/useTasks";
@@ -22,7 +22,7 @@ const Top = styled.section`
   gap: 12px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 34px;
 `;
 
 export default function Dashboard() {
@@ -66,7 +66,6 @@ export default function Dashboard() {
           <Skeleton />
         ) : (
           <>
-            {/* Overlay when TaskForm is open */}
             {showForm && (
               <Box
                 sx={{
@@ -78,11 +77,10 @@ export default function Dashboard() {
                   bgcolor: "rgba(0,0,0,0.3)",
                   zIndex: 999,
                 }}
-                onClick={() => setShowForm(false)} // click outside to close
+                onClick={() => setShowForm(false)}
               />
             )}
 
-            {/* Centered content */}
             {tasks.length === 0 ? (
               showForm ? (
                 <Box
@@ -125,19 +123,9 @@ export default function Dashboard() {
                 </Box>
               )
             ) : (
-              <>
+              <Box>
                 <Top>
                   <InfoCards stats={stats} />
-                  <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-                    <input
-                      placeholder="Search tasks"
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                    />
-                    <button onClick={() => setShowForm((s) => !s)}>
-                      {showForm ? "Close" : "New"}
-                    </button>
-                  </div>
                 </Top>
 
                 {showForm && (
@@ -160,13 +148,28 @@ export default function Dashboard() {
                   </Box>
                 )}
 
-                <TaskList
-                  tasks={filtered}
-                  onToggle={toggleComplete}
-                  onDelete={deleteTask}
-                  onEdit={updateTask}
-                />
-              </>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Typography sx={{ color: "#537178", fontSize: "20px" }}>Tasks</Typography>
+                  <Box style={{ display: "flex", gap: 8 }}>
+                    <TextField
+                      placeholder="Search  by task name"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                    />
+                    <Button variant="contained" sx={{ width: "180px" }} onClick={() => setShowForm((s) => !s)}>
+                      {showForm ? "Close" : "+ New Task"}
+                    </Button>
+                  </Box>
+                </Box>
+                <Box>
+                  <TaskList
+                    tasks={filtered}
+                    onToggle={toggleComplete}
+                    onDelete={deleteTask}
+                    onEdit={updateTask}
+                  />
+                </Box>
+              </Box>
             )}
           </>
         )}

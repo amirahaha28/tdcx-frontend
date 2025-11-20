@@ -7,6 +7,7 @@ import GlobalStyles from "./styles/globalStyles";
 
 const theme = createTheme({
   typography: {
+    color: '#537178',
     fontFamily: `'Montserrat', 'Inter', system-ui, Arial, sans-serif`,
   },
   components: {
