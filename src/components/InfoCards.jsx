@@ -11,7 +11,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Grid = styled.div`
   gap: 16px;
   display: flex;
-  flex-wrap: wrap; /* allows stacking on small screens */
+  flex-wrap: wrap;
 `;
 
 const Card = styled.div`
@@ -20,6 +20,11 @@ const Card = styled.div`
   min-width: 250px;
   background: #fff;
   box-shadow: 0px 3px 6px #0000000A;
+  border-radius: 0;
+
+  @media (min-width: 768px) {
+    border-radius: 12px;
+  }
 `;
 
 export default function InfoCards({ stats, tasks }) {

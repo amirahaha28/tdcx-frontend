@@ -150,9 +150,9 @@ export default function Dashboard() {
                   </Box>
                 )}
 
-                <Box sx={{ p: 1, display: { md: 'flex' }, justifyContent: 'space-between' }}>
+                <Box sx={{ p: { xs: 1, md: 0 }, display: { md: 'flex' }, justifyContent: 'space-between', alignItems: "center" }}>
                   <Typography sx={{ mb: 1, color: "#537178", fontSize: "20px", textAlign: { xs: 'center', md: "left" } }}>Tasks</Typography>
-                  <Box style={{ display: { md: "flex" }, gap: 8}}>
+                  <Box sx={{ display: { md: "flex" }, gap: 1.5 }}>
                     <TextField
                       placeholder="Search by task name"
                       InputProps={{
@@ -167,11 +167,11 @@ export default function Dashboard() {
                       sx={{
                         mb: 1,
                         "& .MuiInputBase-input::placeholder": {
-                          textAlign: "center",
+                          textAlign: { xs: "center", md: "left" },
                         },
                       }}
                     />
-                    <Button variant="contained" sx={{ width: {xs: "100%", md: "180px"} }} onClick={() => setShowForm((s) => !s)}>
+                    <Button variant="contained" sx={{ width: { xs: "100%", md: "180px" } }} onClick={() => setShowForm((s) => !s)}>
                       {showForm ? "Close" : "+ New Task"}
                     </Button>
                   </Box>
